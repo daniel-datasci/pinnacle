@@ -13,14 +13,14 @@
 		<style>
 			/* Style for the countdown timer */
 			#countdown {
-				font-size: 70px;
+				font-size: 30px;
 				text-align: center;
 				margin-top: 10px;
 				color: #ff753a;
 				font-family: 'Bebas Neue', regular;
 			}
 			#progress-text {
-				font-size: 30px; /* Adjust the font size as needed */
+				font-size: 20px; /* Adjust the font size as needed */
 				text-align: center;
 				margin-top: 10px;
 				color: #9f0000c1;
@@ -73,7 +73,7 @@
 								const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
 								const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-								countdown.innerHTML = `${days}days  ${hours}hrs  ${minutes}mins  ${seconds}sec`;
+								countdown.innerHTML = `${days}d  ${hours}h  ${minutes}m  ${seconds}s`;
 							}
 						}
 
@@ -86,7 +86,7 @@
 
 					<!-- Add the colorful progress bar container and bar -->
 					<div id="progress-container" style="width: 100%; background-color: #ccc;">
-						<div id="progress-bar" style="width: 0%; height: 50px; background-color: #9f0000c1;"></div>
+						<div id="progress-bar" style="width: 0%; height: 20px; background-color: #9f0000c1;"></div>
 						
 					</div>
 					<p id="progress-text" style="text-align: center;"><b>0% of Pinnacle staff have completed this survey.</b></p>
@@ -102,7 +102,7 @@
 							const progressText = document.getElementById('progress-text');
 							const percentage = (currentRespondents / totalRespondents) * 100;
 							progressBar.style.width = percentage + '%';
-							progressText.textContent = `${percentage.toFixed(2)}% of Pinnacle staff have completed this survey.`;
+							progressText.textContent = `${percentage.toFixed(2)}% of Pinnacle's staff have completed this survey.`;
 						}
 
 						// Example: Updating the current number of respondents
