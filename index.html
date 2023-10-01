@@ -10,6 +10,23 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<style>
+			/* Style for the countdown timer */
+			#countdown {
+				font-size: 70px;
+				text-align: center;
+				margin-top: 10px;
+				color: #ff753a;
+				font-family: 'Bebas Neue', regular;
+			}
+			#progress-text {
+				font-size: 30px; /* Adjust the font size as needed */
+				text-align: center;
+				margin-top: 10px;
+				color: #9f0000c1;
+				font-family: 'Bebas Neue', regular;
+    		}
+		</style>
 	</head>
 	<body class="landing is-preload">
 		<div id="page-wrapper">
@@ -34,6 +51,73 @@
 			<!-- Main -->
 			<section id="main" class="container">
 				<section class="box special">
+					<div id="countdown"></div>
+
+					<script>
+						// Set the target date 15 days from now
+						const targetDate = new Date();
+						targetDate.setDate(targetDate.getDate() + 15);
+
+						// Update the countdown every second
+						const countdown = document.getElementById('countdown');
+
+						function updateCountdown() {
+							const currentDate = new Date();
+							const timeLeft = targetDate - currentDate;
+
+							if (timeLeft <= 0) {
+								countdown.innerHTML = "Time's up!";
+							} else {
+								const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+								const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+								const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+								const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+								countdown.innerHTML = `${days}days  ${hours}hrs  ${minutes}mins  ${seconds}sec`;
+							}
+						}
+
+						// Update the countdown initially and every second thereafter
+						updateCountdown();
+						setInterval(updateCountdown, 1000);
+					</script>
+					<br>
+					<br>
+
+					<!-- Add the colorful progress bar container and bar -->
+					<div id="progress-container" style="width: 100%; background-color: #ccc;">
+						<div id="progress-bar" style="width: 0%; height: 50px; background-color: #9f0000c1;"></div>
+						
+					</div>
+					<p id="progress-text" style="text-align: center;"><b>0% of Pinnacle staff have completed this survey.</b></p>
+
+					<script>
+						// Initial values
+						let totalRespondents = 200; // Total number of respondents
+						let currentRespondents = 40; // Initial number of respondents
+
+						// Function to update the progress bar
+						function updateProgressBar() {
+							const progressBar = document.getElementById('progress-bar');
+							const progressText = document.getElementById('progress-text');
+							const percentage = (currentRespondents / totalRespondents) * 100;
+							progressBar.style.width = percentage + '%';
+							progressText.textContent = `${percentage.toFixed(2)}% of Pinnacle staff have completed this survey.`;
+						}
+
+						// Example: Updating the current number of respondents
+						function updateRespondents() {
+							// Update the current number of respondents (for example, to 100)
+							currentRespondents = 100;
+							updateProgressBar();
+						}
+
+						// Call the function to initialize the progress bar
+						updateProgressBar();
+					</script>
+					<br>
+					<br>
+					<br>
 					<h3><strong>Organizational Effectiveness Assessment Survey</strong></h3>
 					<p align = "left"><em>This survey is about the organizational effectiveness exercise the Institute of Industrial and 
 						Organizational Psychology is conducting for Pinnacle Oil and Gas. This survey is part of the instruments to 
@@ -45,6 +129,10 @@
 						analyzed as part of a group.<br><br>
 						The Survey is divided into three sections; please ensure to respond to all the questions.</em></b>
 					</p>
+					<br>
+					<br>
+					    <!-- Countdown Timer -->
+					
 					<hr>
 					<h3><strong>Section 1</strong></h3>
 					<hr>
