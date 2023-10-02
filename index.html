@@ -54,9 +54,38 @@
 					<div id="countdown"></div>
 
 					<script>
-						// Set the target date 15 days from now
-						const targetDate = new Date();
-						targetDate.setDate(targetDate.getDate() + 14);
+						// Function to set or get a cookie value
+						function setCookie(name, value, days) {
+							var expires = "";
+							if (days) {
+								var date = new Date();
+								date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+								expires = "; expires=" + date.toUTCString();
+							}
+							document.cookie = name + "=" + (value || "") + expires + "; path=/";
+						}
+
+						function getCookie(name) {
+							var nameEQ = name + "=";
+							var ca = document.cookie.split(';');
+							for (var i = 0; i < ca.length; i++) {
+								var c = ca[i];
+								while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+								if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+							}
+							return null;
+						}
+
+						// Get the target date from the cookie or set it to 12 days from now if it doesn't exist
+						var targetDateString = getCookie("countdownTargetDate");
+						var targetDate;
+						if (targetDateString) {
+							targetDate = new Date(targetDateString);
+						} else {
+							targetDate = new Date();
+							targetDate.setDate(targetDate.getDate() + 12);
+							setCookie("countdownTargetDate", targetDate.toUTCString(), 12);
+						}
 
 						// Update the countdown every second
 						const countdown = document.getElementById('countdown');
@@ -73,7 +102,7 @@
 								const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
 								const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-								countdown.innerHTML = `${days}d  ${hours}h  ${minutes}m  ${seconds}s`;
+								countdown.innerHTML = `Time left: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 							}
 						}
 
